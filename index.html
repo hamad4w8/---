@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الجاسوس الضائع</title>
+<style>
+body {margin:0; background: linear-gradient(180deg,#071124 0%, #0d2130 100%); color:#e6eef6; font-family: Arial, sans-serif; text-align:center; font-size:24px;}
+.page { display: none; padding: 20px; }
+.active { display: block; }
+input, textarea { padding: 12px; border-radius: 6px; border: 1px solid #1e2a44; width: 80%; background: #0f172a; color: #e6eef6; font-size:22px; }
+button { padding: 14px 24px; margin: 10px; border-radius: 8px; border: none; background: #06b6d4; color: #012; cursor: pointer; font-size:22px; }
+.big { font-size: 30px; font-weight: bold; margin: 20px 0; }
+table { margin: auto; border-collapse: collapse; font-size:24px; }
+th, td { border: 1px solid #06b6d4; padding: 10px 18px; }
+th { background-color: #012; }
+td { background-color: #0f172a; }
+</style>
+</head>
+<body>
+
+<div id="home" class="page active">
+<h1>لعبة الجاسوس الضائع</h1>
+<input id="playerName" placeholder="أدخل اسم اللاعب"><br><br>
+<button onclick="addPlayer()">إضافة لاعب</button>
+<ul id="playersList"></ul>
+<button onclick="startGame()">بدء اللعبة</button>
+</div>
+
+<div id="gamePage" class="page">
+<div class="big">الدور على: <span id="currentPlayerName"></span></div>
+<div>اضغط التالي لرؤية غرضك</div>
+<button onclick="nextPlayer()">التالي</button>
+</div>
+
+<div id="votePage" class="page">
+<div id="voteTitle" class="big"></div>
+<ul id="voteList"></ul>
+</div>
+
+<div id="impostorGuess" class="page">
+<div class="big" id="impostorNameShow"></div>
+<input id="guessInput" placeholder="اكتب توقعك">
+<button onclick="submitGuess()">إرسال</button>
+</div>
+
+<div id="scorePage" class="page">
+<h2>النقاط</h2>
+<table>
+<thead><tr><th>اللاعب</th><th>النقاط</th></tr></thead>
+<tbody id="scoreTable"></tbody>
+</table>
+<button onclick="newGame()">لعبة جديدة</button>
+</div>
+
+<script>
+// 🔥 مكان تعديل الأدوات
+const toolPairs = [
+    ["قلم رصاص", "قلم حبر"],
+    ["جوال", "تابلت"],
+    ["تفاحة", "موزة"],
+    ["كتاب", "دفتر"],
+    ["الصيف", "الشتاء"],
+    ["بلايستايشن", "اكس بوكس"],
+    ["المدرسة", "الجامعة"],
+    ["كنتاكي", "ماكدونالدز"],
+    ["عم", "خال"],
+    ["اب", "ام"],
+    ["بيبسي", "كوكاكولا"],
+    ["ميسي", "رونالدو"],
+    ["غابة", "مزرعة"],
+    ["بر", "مخيم"],
+    ["يوتيوب", "تيك توك"],
+    ["طبيب", "صيدلي"]
+];
+
+
+let players = [];
+let playerPoints = {};
+let chosenPair = [];
+let storyTool = "";
+let impostorTool = "";
+let impostorIndex = -1;
+let currentIndex = 0;
+
+// الصفحة الرئيسية
+function addPlayer(){
+    const name = playerName.value.trim();
+    if(!name) return;
+    players.push(name);
+    if(!(name in playerPoints)) playerPoints[name]=0;
+    updatePlayerList();
+    playerName.value="";
+}
+function updatePlayerList(){
+    playersList.innerHTML="";
+    players.forEach(p=>{ const li=document.createElement("li"); li.textContent=p; playersList.appendChild(li); });
+}
+
+// بدء اللعبة
+function startGame(){
+    if(players.length<3){ alert("لازم 3 لاعبين على الأقل"); return; }
+    chosenPair = toolPairs[Math.floor(Math.random()*toolPairs.length)];
+    impostorIndex = Math.floor(Math.random()*players.length);
+    if(Math.random()<0.5){ storyTool=chosenPair[0]; impostorTool=chosenPair[1]; } else { storyTool=chosenPair[1]; impostorTool=chosenPair[0]; }
+    currentIndex=0;
+    showPlayer();
+}
+
+function showSection(id){ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")); document.getElementById(id).classList.add("active"); }
+
+function showPlayer(){
+    if(currentIndex>=players.length){ startVoting(); return; }
+    currentPlayerName.textContent=players[currentIndex];
+    showSection("gamePage");
+}
+
+function nextPlayer(){
+    const pIndex=currentIndex;
+    alert("غرضك: "+(pIndex===impostorIndex?impostorTool:storyTool));
+    currentIndex++;
+    showPlayer();
+}
+
+// التصويت
+let voteTurn=0;
+let voteChosen={};
+function startVoting(){ voteTurn=0; voteChosen={}; showVoteTurn(); showSection("votePage"); }
+
+function showVoteTurn(){
+    voteList.innerHTML="";
+    if(voteTurn>=players.length){ showVoteResult(); return; }
+    let voter=players[voteTurn];
+    voteTitle.textContent=`${voter}، تبي تصوت على منو؟`;
+    players.forEach(p=>{
+        if(p!==voter){
+            const li=document.createElement("li");
+            li.textContent=p;
+            li.onclick=()=>{
+                voteChosen[p]=voteChosen[p]||[];
+                voteChosen[p].push(voter);
+                voteTurn++;
+                showVoteTurn();
+            };
+            voteList.appendChild(li);
+        }
+    });
+}
+
+// نتيجة التصويت
+function showVoteResult(){
+    alert("الأمبوستر هو: "+players[impostorIndex]);
+
+    // توزيع النقاط بعد التصويت
+    for(let target in voteChosen){
+        voteChosen[target].forEach(voter=>{
+            if(voter===players[impostorIndex]) return; // الأمبوستر لا ياخذ نقاط من تصويته
+            if(target===players[impostorIndex]){
+                playerPoints[voter]+=100; // المواطن صح صوت على الأمبوستر
+            }
+        });
+    }
+
+    impostorNameShow.textContent=`${players[impostorIndex]}، حاول توقع السالفة`;
+    showSection("impostorGuess");
+}
+
+// تخمين الأمبوستر
+function submitGuess(){
+    const guess=document.getElementById("guessInput").value.trim();
+    if(guess===storyTool){ // تخمين صح
+        playerPoints[players[impostorIndex]]+=100;
+    }
+    showScores();
+}
+
+// عرض النقاط
+function showScores(){
+    scoreTable.innerHTML="";
+    for(let p of players){
+        const tr=document.createElement("tr");
+        const tdName=document.createElement("td"); tdName.textContent=p;
+        const tdPoints=document.createElement("td"); tdPoints.textContent=playerPoints[p];
+        tr.appendChild(tdName); tr.appendChild(tdPoints);
+        scoreTable.appendChild(tr);
+    }
+    showSection("scorePage");
+}
+
+// لعبة جديدة
+function newGame(){
+    currentIndex=0; voteTurn=0; voteChosen={}; impostorIndex=-1;
+    showSection("home"); updatePlayerList();
+    document.getElementById("guessInput").value="";
+}
+</script>
+
+</body>
+</html>
