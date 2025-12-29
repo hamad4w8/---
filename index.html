@@ -2,553 +2,515 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-<title>الimposter الضائع</title>
-<style>
-/* إعدادات أساسية للجوال */
-* {
-    box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <title>الimposter الضائع</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(180deg,#071124 0%, #0d2130 100%);
-    color: #e6eef6;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    font-size: 16px; /* تصغير الحجم الأساسي */
-    min-height: 100vh;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg,#071124 0%, #0d2130 100%);
+            color: #e6eef6;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 16px;
+            min-height: 100vh;
+        }
 
-.page {
-    display: none;
-    padding: 15px;
-    max-width: 100%;
-    overflow-x: hidden;
-}
+        .page {
+            display: none;
+            padding: 15px;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
 
-.active {
-    display: block;
-}
+        .active {
+            display: block;
+        }
 
-/* تعديل حجم الخطوط للجوال */
-h1 {
-    font-size: 1.8rem;
-    margin: 15px 0;
-}
+        h1 {
+            font-size: 1.8rem;
+            margin: 15px 0;
+        }
 
-.big {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 15px 0;
-}
+        .big {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 15px 0;
+        }
 
-/* تعديل حجم المدخلات */
-input, textarea {
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #1e2a44;
-    width: 95%;
-    max-width: 500px;
-    background: #0f172a;
-    color: #e6eef6;
-    font-size: 18px;
-    margin: 10px auto;
-    display: block;
-}
+        input, textarea {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #1e2a44;
+            width: 95%;
+            max-width: 500px;
+            background: #0f172a;
+            color: #e6eef6;
+            font-size: 18px;
+            margin: 10px auto;
+            display: block;
+        }
 
-/* تعديل حجم الأزرار */
-button {
-    padding: 18px 30px;
-    margin: 12px 8px;
-    border-radius: 10px;
-    border: none;
-    background: #06b6d4;
-    color: #012;
-    cursor: pointer;
-    font-size: 20px;
-    width: 90%;
-    max-width: 400px;
-    min-height: 60px;
-}
+        button {
+            padding: 18px 30px;
+            margin: 12px 8px;
+            border-radius: 10px;
+            border: none;
+            background: #06b6d4;
+            color: #012;
+            cursor: pointer;
+            font-size: 20px;
+            width: 90%;
+            max-width: 400px;
+            min-height: 60px;
+        }
 
-/* تعديل القائمة */
-ul {
-    padding: 0;
-    margin: 20px auto;
-    max-width: 500px;
-}
+        ul {
+            padding: 0;
+            margin: 20px auto;
+            max-width: 500px;
+        }
 
-li {
-    list-style: none;
-    padding: 12px;
-    margin: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-}
+        li {
+            list-style: none;
+            padding: 12px;
+            margin: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-/* تعديل الجدول */
-table {
-    margin: 20px auto;
-    border-collapse: collapse;
-    width: 95%;
-    max-width: 500px;
-    font-size: 18px;
-}
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 95%;
+            max-width: 500px;
+            font-size: 18px;
+        }
 
-th, td {
-    border: 1px solid #06b6d4;
-    padding: 12px;
-    text-align: center;
-}
+        th, td {
+            border: 1px solid #06b6d4;
+            padding: 12px;
+            text-align: center;
+        }
 
-th {
-    background-color: #012;
-    font-size: 20px;
-}
+        th {
+            background-color: #012;
+            font-size: 20px;
+        }
 
-td {
-    background-color: #0f172a;
-}
+        td {
+            background-color: #0f172a;
+        }
 
-/* تحسين المسافات للجوال */
-#playersList li {
-    margin: 10px auto;
-    padding: 15px;
-    font-size: 22px;
-}
+        #playersList li {
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 22px;
+        }
 
-/* تحسين لـ iPhone خاصة */
-@media screen and (max-width: 480px) {
-    body {
-        font-size: 14px;
-    }
-    
-    h1 {
-        font-size: 1.6rem;
-    }
-    
-    .big {
-        font-size: 1.3rem;
-    }
-    
-    button {
-        padding: 16px 25px;
-        font-size: 18px;
-        min-height: 55px;
-    }
-    
-    input, textarea {
-        font-size: 16px;
-        padding: 12px;
-    }
-    
-    table {
-        font-size: 16px;
-    }
-}
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .big {
+                font-size: 1.3rem;
+            }
+            
+            button {
+                padding: 16px 25px;
+                font-size: 18px;
+                min-height: 55px;
+            }
+            
+            input, textarea {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 16px;
+            }
+        }
 
-/* تحسين لشاشات كبيرة */
-@media screen and (min-width: 768px) {
-    .page {
-        padding: 25px;
-    }
-    
-    button {
-        width: auto;
-        min-width: 200px;
-    }
-    
-    input, textarea {
-        width: 80%;
-    }
-}
-</style>
+        @media screen and (min-width: 768px) {
+            .page {
+                padding: 25px;
+            }
+            
+            button {
+                width: auto;
+                min-width: 200px;
+            }
+            
+            input, textarea {
+                width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div id="home" class="page active">
-<h1>لعبة الimposter الضائع</h1>
-<input id="playerName" placeholder="أدخل اسم اللاعب"><br><br>
-<button onclick="addPlayer()">إضافة لاعب</button>
-<ul id="playersList"></ul>
-<button onclick="startGame()">بدء اللعبة</button>
+    <h1>لعبة الimposter الضائع</h1>
+    <input id="playerName" placeholder="أدخل اسم اللاعب"><br><br>
+    <button onclick="addPlayer()">إضافة لاعب</button>
+    <ul id="playersList"></ul>
+    <button onclick="startGame()">بدء اللعبة</button>
 </div>
 
-<div id="gamePage" class="page">
-<div class="big">الدور على: <span id="currentPlayerName"></span></div>
-<div>اضغط التالي لرؤية غرضك</div>
-<button onclick="nextPlayer()">التالي</button>
+<!-- الصفحة الأولى: صفحة بدء الدور -->
+<div id="startTurnPage" class="page">
+    <div class="big">الدور على: <span id="currentTurnPlayer"></span></div>
+    <button onclick="showPlayerTool()">التالي</button>
+</div>
+
+<!-- الصفحة الثانية: صفحة عرض الغرض -->
+<div id="showToolPage" class="page">
+    <div class="big" id="playerToolText"></div>
+    <button onclick="goToNextPlayer()">موافق</button>
+</div>
+
+<!-- الصفحة الثالثة: صفحة اللاعب التالي -->
+<div id="nextPlayerPage" class="page">
+    <div class="big" id="nextPlayerName"></div>
+    <button onclick="continueToNextPlayer()">استمرار</button>
+</div>
+
+<!-- الصفحة الرابعة: صفحة طلب المعلومات -->
+<div id="infoPage" class="page">
+    <div class="big" id="playerInfoText"></div>
+    <button onclick="showNextInfoPlayer()">التالي</button>
+</div>
+
+<!-- الصفحة الخامسة: صفحة اللاعب التالي للمعلومات -->
+<div id="nextInfoPage" class="page">
+    <div class="big" id="nextInfoPlayer"></div>
+    <button onclick="continueToNextInfoPlayer()">استمرار</button>
 </div>
 
 <div id="votePage" class="page">
-<div id="voteTitle" class="big"></div>
-<ul id="voteList"></ul>
+    <div id="voteTitle" class="big"></div>
+    <ul id="voteList"></ul>
 </div>
 
 <div id="impostorGuess" class="page">
-<div class="big" id="impostorNameShow"></div>
-<input id="guessInput" placeholder="اكتب توقعك">
-<button onclick="submitGuess()">إرسال</button>
+    <div class="big" id="impostorNameShow"></div>
+    <input id="guessInput" placeholder="اكتب توقعك">
+    <button onclick="submitGuess()">إرسال</button>
 </div>
 
 <div id="scorePage" class="page">
-<h2>النقاط</h2>
-<table>
-<thead><tr><th>اللاعب</th><th>النقاط</th></tr></thead>
-<tbody id="scoreTable"></tbody>
-</table>
-<button onclick="newGame()">لعبة جديدة</button>
+    <h2>النقاط</h2>
+    <table>
+        <thead><tr><th>اللاعب</th><th>النقاط</th></tr></thead>
+        <tbody id="scoreTable"></tbody>
+    </table>
+    <button onclick="newGame()">لعبة جديدة</button>
 </div>
 
 <script>
-// 🔥 مكان تعديل الأدوات
-const toolPairs = [
-    ["قلم رصاص", "قلم حبر"],
-    ["جوال", "ايباد"],
-    ["تفاحة", "موزة"],
-    ["كتاب", "دفتر"],
-    ["الصيف", "الشتاء"],
-    ["بلايستايشن", "اكس بوكس"],
-    ["المدرسة", "الجامعة"],
-    ["كنتاكي", "ماكدونالدز"],
-    ["عم", "خال"],
-    ["اب", "ام"],
-    ["بيبسي", "كوكاكولا"],
-    ["ميسي", "رونالدو"],
-    ["غابة", "مزرعة"],
-    ["بر", "مخيم"],
-    ["يوتيوب", "تيك توك"],
-    ["طبيب", "صيدلي"],
-    ['اليابان',' “الصين'],
-['كرسي','كنبة'],
-['سيارة','قطار'],
-['بيت','منزل'],
+    const toolPairs = [
+        ["قلم رصاص", "قلم حبر"],
+        ["جوال", "ايباد"],
+        ["تفاحة", "موزة"],
+        ["كتاب", "دفتر"],
+        ["الصيف", "الشتاء"],
+        ["بلايستايشن", "اكس بوكس"],
+        ["المدرسة", "الجامعة"],
+        ["كنتاكي", "ماكدونالدز"],
+        ["عم", "خال"],
+        ["اب", "ام"],
+        ["بيبسي", "كوكاكولا"],
+        ["ميسي", "رونالدو"],
+        ["غابة", "مزرعة"],
+        ["بر", "مخيم"],
+        ["يوتيوب", "تيك توك"],
+        ["طبيب", "صيدلي"]
+    ];
 
-    ['سعيد', 'حزين'],
-    ['كبير', 'صغير'],
-    ['طويل', 'قصير'],
-    ['عريض', 'ضيق'],
-    ['ثقيل', 'خفيف'],
-    ['سريع', 'بطيء'],
-    ['قاسي', 'لين'],
-    ['حار', 'بارد'],
-    ['جاف', 'رطب'],
-    ['ناعم', 'خشن'],
-    ['فاتح', 'غامق'],
-    ['نقي', 'مشوب'],
-    ['قديم', 'جديد'],
-    ['جميل', 'قبيح'],
-    ['نظيف', 'وسخ'],
-    ['فارغ', 'ممتلئ'],
-    ['غني', 'فقير'],
-    ['قوي', 'ضعيف'],
-    ['ذكي', 'غبي'],
-    ['شجاع', 'جبان'],
-    ['صادق', 'كاذب'],
-    ['ظاهر', 'باطن'],
-    ['واضح', 'غامض'],
-    ['بسيط', 'معقد'],
-    ['سهل', 'صعب'],
-    ['حلو', 'مر'],
-    ['مالح', 'حلو'],
-    ['مرتفع', 'منخفض'],
-    ['غالي', 'رخيص'],
-    ['سميك', 'رفيع'],
-    ['مستقيم', 'منحني'],
-    ['حاضر', 'غائب'],
-    ['يقظ', 'نائم'],
-    ['متحرك', 'ساكن'],
-    ['صاخب', 'هادئ'],
-    ['مضيء', 'مظلم'],
-    ['صحي', 'مريض'],
-    ['حي', 'ميت'],
-    ['طازج', 'فاسد'],
-    ['طبيعي', 'اصطناعي'],
-    ['دافئ', 'بارد'],
-    ['محبوب', 'مكروه'],
-    ['منتظم', 'عشوائي'],
-    ['مثالي', 'ناقص'],
-    ['منفتح', 'منغلق'],
-    ['اجتماعي', 'انطوائي'],
-    ['صبور', 'عجول'],
-    ['كريم', 'بخيل'],
-    ['متفائل', 'متشائم'],
-    ['هادئ', 'عصبي'],
-    ['راضي', 'غاضب'],
-    ['شبعان', 'جوعان'],
-    ['عطشان', 'ريان'],
-    ['مستقر', 'متقلب'],
-    ['آمن', 'خائف'],
-    ['حر', 'عبد'],
-    ['مستقل', 'تابع'],
-    ['فعال', 'خامل'],
-    ['مفيد', 'ضار'],
-    ['إيجابي', 'سلبي'],
-    ['دقيق', 'تقريبي'],
-    ['عام', 'خاص'],
-    ['كلي', 'جزئي'],
-    ['داخلي', 'خارجي'],
-    ['أعلى', 'أسفل'],
-    ['أمام', 'خلف'],
-    ['يمين', 'يسار'],
-    ['شمال', 'جنوب'],
-    ['شرق', 'غرب'],
-    ['بداية', 'نهاية'],
-    ['دخول', 'خروج'],
-    ['قدوم', 'ذهاب'],
-    ['وصول', 'مغادرة'],
-    ['صعود', 'هبوط'],
-    ['زيادة', 'نقصان'],
-    ['ربح', 'خسارة'],
-    ['نجاح', 'فشل'],
-    ['نصر', 'هزيمة'],
-    ['حرب', 'سلام'],
-    ['حب', 'كره'],
-    ['أمل', 'يأس'],
-    ['فرح', 'ترح'],
-    ['عطاء', 'أخذ'],
-    ['عرض', 'طلب'],
-    ['إنتاج', 'استهلاك'],
-    ['بناء', 'هدم'],
-    ['فتح', 'إغلاق'],
-    ['ربط', 'فصل'],
-    ['جمع', 'تفريق'],
-    ['تجميع', 'تفكيك'],
-    ['تركيب', 'إزالة'],
-    ['تقديم', 'تأخير'],
-    ['تسريع', 'إبطاء'],
-    ['رفع', 'خفض'],
-    ['تمديد', 'تقصير'],
-    ['توسيع', 'تضييق'],
-    ['تغميق', 'تفتيح'],
-    ['إشعال', 'إطفاء'],
-    ['بدائي', 'متطور'],
-    ['تقليدي', 'حديث'],
-    ['ديني', 'علماني'],
-        ['لطيف', 'فظ'],
-    ['هادئ', 'صاخب'],
-    ['منظم', 'فوضوي'],
-    ['دافئ', 'بارد'],
-    ['مشرق', 'مكفهر'],
-    ['واسع', 'ضيق'],
-    ['عميق', 'سطحي'],
-    ['مستمر', 'منقطع'],
-    ['ثابت', 'متحول'],
-    ['صريح', 'ملتو'],
-    ['مباشر', 'غير مباشر'],
-    ['علني', 'سري'],
-    ['رسمي', 'غير رسمي'],
-    ['عملي', 'نظري'],
-    ['واقعي', 'خيالي'],
-    ['ملموس', 'مجرد'],
-    ['حقيقي', 'وهمي'],
-    ['أصلي', 'مزيف'],
-    ['طوعي', 'إجباري'],
-    ['إرادي', 'لا إرادي'],
-    ['واعي', 'لاواعي'],
-    ['متعمد', 'عرضي'],
-    ['مقبول', 'مرفوض'],
-    ['مرغوب', 'مكروه'],
-    ['محترم', 'مهان'],
-    ['مبجل', 'محتقر'],
-    ['نشيط', 'خامل'],
-    ['منتج', 'عاطل'],
-    ['مبدع', 'تقليدي'],
-    ['أصيل', 'مقلد'],
-    ['فريد', 'شائع'],
-    ['نادر', 'متوفر'],
-    ['غزير', 'شحيح'],
-    ['وفير', 'نادر'],
-    ['متنوع', 'متشابه'],
-    ['مختلف', 'متماثل'],
-    ['متغير', 'ثابت'],
-    ['مرن', 'صلب'],
-    ['لين', 'قاس'],
-    ['هش', 'متين'],
-    ['قابل للكسر', 'غير قابل للكسر'],
-    ['شفاف', 'معتم'],
-    ['لامع', 'باهت'],
-    ['ساطع', 'خافت'],
-    ['صاف', 'عكر'],
-    ['منتعش', 'مرهق'],
-    ['مريح', 'مزعج'],
-    ['مفيد', 'ضار'],
-    ['صالح', 'طالح'],
-    ['بنَّاء', 'هدَّام'],
-    ['متحضر', 'همجي'],
-    ['مهذب', 'وقح'],
-    ['رقيق', 'فظ'],
-    ['حنون', 'قاسي القلب'],
-    ['عطوف', 'قاس'],
-    ['متسامح', 'متشدد'],
-    ['متفهم', 'جاحد'],
-    ['مقدر', 'جاحد'],
-    ['شاكر', 'كفور'],
-    ['وفي', 'خائن'],
-    ['مخلص', 'غادر'],
-    ['أمين', 'خائن'],
-    ['مستقيم', 'منحرف'],
-    ['نزيه', 'فاسد'],
-    ['شريف', 'وغد'],
-    ['عفيف', 'فاجر'],
-    ['متزن', 'متهور'],
-    ['حكيم', 'أحمق'],
-    ['عاقل', 'طائش'],
-    ['رزين', 'طائش'],
-    ['جاد', 'هزلي'],
-    ['رصين', 'خفيف'],
-    ['مهيب', 'هزيل'],
-    ['عظيم', 'تافه'],
-    ['جليل', 'حقير'],
-    ['سام', 'وضيع'],
-    ['نبيل', 'دنيء'],
-    ['سمح', 'بخيل'],
-    ['معطاء', 'شحيح'],
-    ['كريم', 'لئيم'],
-    ['سخي', 'بخيل'],
-    ['متواضع', 'متعال'],
-    ['خجول', 'وقح'],
-    ['حيي', 'بذيء'],
-    ['محتشمة', 'فاضحة'],
-    ['ستير', 'عاهر'],
-    ['متحفظ', 'منفلت'],
-    ['محافظ', 'تحرري'],
-    ['تقليدي', 'تقدمي'],
-    ['رجعي', 'تقدمي'],
-    ['يميني', 'يساري'],
-    ['محايد', 'منحاز'],
-    ['عادل', 'ظالم'],
-    ['منصف', 'جائر'],
-    ['رحيم', 'قاس'],
-    ['عطوف', 'عدواني']
+    // المتغيرات الأصلية
+    let players = [];
+    let playerPoints = {};
+    let chosenPair = [];
+    let storyTool = "";
+    let impostorTool = "";
+    let impostorIndex = -1;
 
+    // المتغيرات الجديدة
+    let playerOrder = [];
+    let currentPlayerIndex = 0;
+    let allPlayersSawTools = false; // هل جميع اللاعبين شافوا أغراضهم؟
+    let infoPlayerIndex = 0; // مؤشر للاعبين في مرحلة إعطاء المعلومات
 
-]       
+    // الصفحة الرئيسية
+    function addPlayer(){
+        const name = playerName.value.trim();
+        if(!name) return;
+        players.push(name);
+        if(!(name in playerPoints)) playerPoints[name] = 0;
+        updatePlayerList();
+        playerName.value = "";
+    }
+    
+    function updatePlayerList(){
+        playersList.innerHTML = "";
+        players.forEach(p => { 
+            const li = document.createElement("li"); 
+            li.textContent = p; 
+            playersList.appendChild(li); 
+        });
+    }
 
-
-
-let players = [];
-let playerPoints = {};
-let chosenPair = [];
-let storyTool = "";
-let impostorTool = "";
-let impostorIndex = -1;
-let currentIndex = 0;
-
-// الصفحة الرئيسية
-function addPlayer(){
-    const name = playerName.value.trim();
-    if(!name) return;
-    players.push(name);
-    if(!(name in playerPoints)) playerPoints[name]=0;
-    updatePlayerList();
-    playerName.value="";
-}
-function updatePlayerList(){
-    playersList.innerHTML="";
-    players.forEach(p=>{ const li=document.createElement("li"); li.textContent=p; playersList.appendChild(li); });
-}
-
-// بدء اللعبة
-function startGame(){
-    if(players.length<3){ alert("لازم 3 لاعبين على الأقل"); return; }
-    chosenPair = toolPairs[Math.floor(Math.random()*toolPairs.length)];
-    impostorIndex = Math.floor(Math.random()*players.length);
-    if(Math.random()<0.5){ storyTool=chosenPair[0]; impostorTool=chosenPair[1]; } else { storyTool=chosenPair[1]; impostorTool=chosenPair[0]; }
-    currentIndex=0;
-    showPlayer();
-}
-
-function showSection(id){ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")); document.getElementById(id).classList.add("active"); }
-
-function showPlayer(){
-    if(currentIndex>=players.length){ startVoting(); return; }
-    currentPlayerName.textContent=players[currentIndex];
-    showSection("gamePage");
-}
-
-function nextPlayer(){
-    const pIndex=currentIndex;
-    alert("غرضك: "+(pIndex===impostorIndex?impostorTool:storyTool));
-    currentIndex++;
-    showPlayer();
-}
-
-// التصويت
-let voteTurn=0;
-let voteChosen={};
-function startVoting(){ voteTurn=0; voteChosen={}; showVoteTurn(); showSection("votePage"); }
-
-function showVoteTurn(){
-    voteList.innerHTML="";
-    if(voteTurn>=players.length){ showVoteResult(); return; }
-    let voter=players[voteTurn];
-    voteTitle.textContent=`${voter}، تبي تصوت على منو؟`;
-    players.forEach(p=>{
-        if(p!==voter){
-            const li=document.createElement("li");
-            li.textContent=p;
-            li.onclick=()=>{
-                voteChosen[p]=voteChosen[p]||[];
-                voteChosen[p].push(voter);
-                voteTurn++;
-                showVoteTurn();
-            };
-            voteList.appendChild(li);
+    // 🔥 الدوال الجديدة
+    
+    // خلط اللاعبين عشوائياً
+    function shufflePlayers() {
+        playerOrder = [...players];
+        for(let i = playerOrder.length - 1; i > 0; i--){
+            const j = Math.floor(Math.random() * (i + 1));
+            [playerOrder[i], playerOrder[j]] = [playerOrder[j], playerOrder[i]];
         }
-    });
-}
+        currentPlayerIndex = 0;
+        infoPlayerIndex = 0;
+        allPlayersSawTools = false;
+    }
 
-// نتيجة التصويت
-function showVoteResult(){
-    alert("الأمبوستر هو: "+players[impostorIndex]);
+    // بدء دور اللاعب لرؤية الغرض
+    function startPlayerTurn() {
+        if(currentPlayerIndex >= playerOrder.length) {
+            // انتهى جميع اللاعبين من رؤية الأغراض
+            allPlayersSawTools = true;
+            startGivingInfo(); // ابدأ مرحلة إعطاء المعلومات
+            return;
+        }
+        
+        const currentPlayer = playerOrder[currentPlayerIndex];
+        document.getElementById("currentTurnPlayer").textContent = currentPlayer;
+        showSection("startTurnPage");
+    }
 
-    // توزيع النقاط بعد التصويت
-    for(let target in voteChosen){
-        voteChosen[target].forEach(voter=>{
-            if(voter===players[impostorIndex]) return; // الأمبوستر لا ياخذ نقاط من تصويته
-            if(target===players[impostorIndex]){
-                playerPoints[voter]+=100; // المواطن صح صوت على الأمبوستر
+    // عرض الغرض للاعب
+    function showPlayerTool() {
+        const currentPlayer = playerOrder[currentPlayerIndex];
+        const isImpostor = (currentPlayer === players[impostorIndex]);
+        const tool = isImpostor ? impostorTool : storyTool;
+        
+        document.getElementById("playerToolText").textContent = 
+            `يا ${currentPlayer}، غرضك هو: ${tool}`;
+        
+        showSection("showToolPage");
+    }
+
+    // الانتقال للاعب التالي (لرؤية الأغراض)
+    function goToNextPlayer() {
+        const nextIndex = currentPlayerIndex + 1;
+        
+        if(nextIndex < playerOrder.length) {
+            const nextPlayer = playerOrder[nextIndex];
+            document.getElementById("nextPlayerName").textContent = 
+                `اللاعب التالي: ${nextPlayer}`;
+            showSection("nextPlayerPage");
+        } else {
+            document.getElementById("nextPlayerName").textContent = 
+                "انتهى جميع اللاعبين من رؤية الأغراض، ستبدأ مرحلة إعطاء المعلومات";
+            showSection("nextPlayerPage");
+        }
+    }
+
+    // استمرار للاعب التالي
+    function continueToNextPlayer() {
+        currentPlayerIndex++;
+        if(currentPlayerIndex < playerOrder.length) {
+            // ابدأ بدور اللاعب التالي لرؤية الغرض
+            startPlayerTurn();
+        } else {
+            // انتهى الجميع من رؤية الأغراض
+            allPlayersSawTools = true;
+            startGivingInfo();
+        }
+    }
+
+    // 🔥 بدء مرحلة إعطاء المعلومات (بعد ما الكل شاف أغراضهم)
+    function startGivingInfo() {
+        infoPlayerIndex = 0;
+        showPlayerInfoPage();
+    }
+
+    // عرض صفحة طلب المعلومات
+    function showPlayerInfoPage() {
+        if(infoPlayerIndex >= playerOrder.length) {
+            // انتهى جميع اللاعبين من إعطاء المعلومات
+            startVoting();
+            return;
+        }
+        
+        const currentPlayer = playerOrder[infoPlayerIndex];
+        document.getElementById("playerInfoText").textContent = 
+            `يا ${currentPlayer}، عط معلومة عن الشيء`;
+        showSection("infoPage");
+    }
+
+    // الانتقال للاعب التالي في مرحلة المعلومات
+    function showNextInfoPlayer() {
+        const nextIndex = infoPlayerIndex + 1;
+        
+        if(nextIndex < playerOrder.length) {
+            const nextPlayer = playerOrder[nextIndex];
+            document.getElementById("nextInfoPlayer").textContent = 
+                `اللاعب التالي: ${nextPlayer}`;
+            showSection("nextInfoPage");
+        } else {
+            document.getElementById("nextInfoPlayer").textContent = 
+                "انتهى دور جميع اللاعبين، سيبدأ التصويت الآن";
+            showSection("nextInfoPage");
+        }
+    }
+
+    // استمرار للاعب التالي في مرحلة المعلومات
+    function continueToNextInfoPlayer() {
+        infoPlayerIndex++;
+        if(infoPlayerIndex < playerOrder.length) {
+            // ابدأ باللاعب التالي
+            showPlayerInfoPage();
+        } else {
+            // انتهى الجميع، ابدأ التصويت
+            startVoting();
+        }
+    }
+
+    // بدء اللعبة
+    function startGame(){
+        if(players.length < 3){ 
+            alert("لازم 3 لاعبين على الأقل"); 
+            return; 
+        }
+        
+        // اختيار الزوج والأمبوستر
+        chosenPair = toolPairs[Math.floor(Math.random() * toolPairs.length)];
+        impostorIndex = Math.floor(Math.random() * players.length);
+        
+        if(Math.random() < 0.5){ 
+            storyTool = chosenPair[0]; 
+            impostorTool = chosenPair[1]; 
+        } else { 
+            storyTool = chosenPair[1]; 
+            impostorTool = chosenPair[0]; 
+        }
+        
+        // خلط اللاعبين وبدء الدورة
+        shufflePlayers();
+        startPlayerTurn(); // ابدأ بالصفحة الأولى لرؤية الأغراض
+    }
+
+    // عرض الصفحة
+    function showSection(id){ 
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("active")); 
+        document.getElementById(id).classList.add("active"); 
+    }
+
+    // التصويت
+    let voteTurn = 0;
+    let voteChosen = {};
+    
+    function startVoting(){ 
+        voteTurn = 0; 
+        voteChosen = {}; 
+        showVoteTurn(); 
+        showSection("votePage"); 
+    }
+
+    function showVoteTurn(){
+        voteList.innerHTML = "";
+        if(voteTurn >= players.length){ 
+            showVoteResult(); 
+            return; 
+        }
+        
+        let voter = players[voteTurn];
+        voteTitle.textContent = `${voter}، تبي تصوت على منو؟`;
+        
+        players.forEach(p => {
+            if(p !== voter){
+                const li = document.createElement("li");
+                li.textContent = p;
+                li.onclick = () => {
+                    voteChosen[p] = voteChosen[p] || [];
+                    voteChosen[p].push(voter);
+                    voteTurn++;
+                    showVoteTurn();
+                };
+                voteList.appendChild(li);
             }
         });
     }
 
-    impostorNameShow.textContent=`${players[impostorIndex]}، حاول توقع السالفة`;
-    showSection("impostorGuess");
-}
+    // نتيجة التصويت
+    function showVoteResult(){
+        alert("الأمبوستر هو: " + players[impostorIndex]);
 
-// تخمين الأمبوستر
-function submitGuess(){
-    const guess=document.getElementById("guessInput").value.trim();
-    if(guess===storyTool){ // تخمين صح
-        playerPoints[players[impostorIndex]]+=100;
+        // توزيع النقاط
+        for(let target in voteChosen){
+            voteChosen[target].forEach(voter => {
+                if(voter === players[impostorIndex]) return;
+                if(target === players[impostorIndex]){
+                    playerPoints[voter] += 100;
+                }
+            });
+        }
+
+        impostorNameShow.textContent = `${players[impostorIndex]}، حاول توقع السالفة`;
+        showSection("impostorGuess");
     }
-    showScores();
-}
 
-// عرض النقاط
-function showScores(){
-    scoreTable.innerHTML="";
-    for(let p of players){
-        const tr=document.createElement("tr");
-        const tdName=document.createElement("td"); tdName.textContent=p;
-        const tdPoints=document.createElement("td"); tdPoints.textContent=playerPoints[p];
-        tr.appendChild(tdName); tr.appendChild(tdPoints);
-        scoreTable.appendChild(tr);
+    // تخمين الأمبوستر
+    function submitGuess(){
+        const guess = document.getElementById("guessInput").value.trim();
+        if(guess === storyTool){
+            playerPoints[players[impostorIndex]] += 100;
+        }
+        showScores();
     }
-    showSection("scorePage");
-}
 
-// لعبة جديدة
-function newGame(){
-    currentIndex=0; voteTurn=0; voteChosen={}; impostorIndex=-1;
-    showSection("home"); updatePlayerList();
-    document.getElementById("guessInput").value="";
-}
+    // عرض النقاط
+    function showScores(){
+        scoreTable.innerHTML = "";
+        for(let p of players){
+            const tr = document.createElement("tr");
+            const tdName = document.createElement("td"); 
+            tdName.textContent = p;
+            const tdPoints = document.createElement("td"); 
+            tdPoints.textContent = playerPoints[p] || 0;
+            tr.appendChild(tdName); 
+            tr.appendChild(tdPoints);
+            scoreTable.appendChild(tr);
+        }
+        showSection("scorePage");
+    }
+
+    // لعبة جديدة
+    function newGame(){
+        voteTurn = 0; 
+        voteChosen = {}; 
+        impostorIndex = -1;
+        currentPlayerIndex = 0;
+        infoPlayerIndex = 0;
+        playerOrder = [];
+        allPlayersSawTools = false;
+        showSection("home"); 
+        updatePlayerList();
+        document.getElementById("guessInput").value = "";
+    }
 </script>
 
 </body>
